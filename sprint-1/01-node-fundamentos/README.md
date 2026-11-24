@@ -10,25 +10,25 @@
 
 ## O que estudei
 
-- [ ] Node como runtime (V8, sem DOM, acesso a arquivos/rede)
-- [ ] Event loop e I/O não bloqueante
+- [x] Node como runtime (V8, sem DOM, acesso a arquivos/rede)
+- [x] Event loop e I/O não bloqueante
 - [ ] CommonJS x ESM (`require` x `import`, `"type": "module"`)
 - [ ] npm: `init`, dependências x devDependencies, scripts
 
 ## Conceitos-chave (com minhas palavras)
 
-| Conceito | O que é | Analogia |
-| --- | --- | --- |
-| Event loop |  |  |
-| I/O não bloqueante |  |  |
+| Conceito               | O que é                                                                                                                                                            | Analogia                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Event Loop**         | Mecanismo que coordena a execução de tarefas assíncronas, verificando a Call Stack e encaminhando callbacks e microtasks (Promises) para execução quando possível. | É como um vigia que monitora constantemente se a Call Stack está vazia e verifica quais tarefas estão prontas para serem executadas. |
+| **I/O não bloqueante** | Capacidade de realizar operações de entrada e saída (I/O) sem bloquear a thread principal enquanto aguarda a conclusão dessas operações.                           | É como o serviço de um garçom: ele faz o pedido na cozinha e, enquanto aguarda o preparo, continua atendendo outras mesas.           |
 
 ## Exercício
 
 **Objetivo:** servidor com o módulo `http` nativo (sem Express) que:
 
-- [ ] `GET /tarefas` → lista de tarefas em JSON
-- [ ] `POST /tarefas` → lê o corpo, adiciona na lista, responde `201`
-- [ ] qualquer outra rota → `404`
+- [x] `GET /tarefas` → lista de tarefas em JSON
+- [x] `POST /tarefas` → lê o corpo, adiciona na lista, responde `201`
+- [x] qualquer outra rota → `404`
 
 **Como rodar:**
 
@@ -38,7 +38,7 @@ node server.js
 
 ## O que deu errado (e por quê)
 
--
+**Dificuldade com o módulo http nativo**: Inicialmente, tive dificuldade em estruturar o servidor e compreender o fluxo de uma requisição HTTP, principalmente por ainda não estar familiarizado com a sintaxe e a API do módulo nativo do Node.js. Isso dificultou a implementação das rotas `GET /tarefas` e `POST /tarefas`. Após consultar a documentação oficial e compreender melhor o ciclo de uma requisição, desde o recebimento até o envio da resposta, consegui implementar o exercício corretamente.
 
 ## Dúvidas em aberto
 
@@ -46,5 +46,5 @@ node server.js
 
 ## Referências
 
-- Udemy: seção
+- Udemy: Node.js - The Complete RESTful API Masterclass - Seção 1 ao 5;
 - Docs: https://nodejs.org/api/http.html
