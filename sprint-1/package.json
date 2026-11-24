@@ -1,0 +1,12 @@
+{
+  "name": "sprint-1",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:http": "node --watch 03-http-rest-postman/server.js",
+    "start:http": "node 03-http-rest-postman/server.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
