@@ -2,8 +2,13 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
 
+const connectDatabase = require("./config/database");
+
 // Setting up config.env file variables
 dotenv.config({ path: "./config/config.env" });
+
+// Connecting to the database
+connectDatabase();
 
 // Importing routes
 const jobs = require("./routes/jobs");
