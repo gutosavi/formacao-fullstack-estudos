@@ -5,6 +5,14 @@ const dotenv = require("dotenv");
 // Setting up config.env file variables
 dotenv.config({ path: "./config/config.env" });
 
+// Importing routes
+const jobs = require("./routes/jobs");
+
+app.use("/api/v1", jobs);
+
+// Middleware to parse JSON requests
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to Jobee API" });
 });
