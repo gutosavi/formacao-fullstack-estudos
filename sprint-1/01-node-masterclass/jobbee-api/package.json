@@ -1,0 +1,22 @@
+{
+  "name": "jobbee-api",
+  "version": "1.0.0",
+  "description": "Jobee API: projeto do curso Node.js RESTful API Masterclass",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "prod": "SET NODE_ENV=production & node index.js"
+  },
+  "keywords": [],
+  "author": "Gustavo Savi",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
