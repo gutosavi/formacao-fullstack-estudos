@@ -10,18 +10,18 @@
 
 ## O que estudei
 
-- [ ] Métodos HTTP e idempotência
-- [ ] Status codes (200, 201, 204, 400, 404, 409, 500)
-- [ ] Headers (`Content-Type`, `Authorization`)
-- [ ] Convenções REST: recursos no plural, aninhamento, query params
-- [ ] Postman: collections, environments, variáveis, testes
+- [x] Métodos HTTP e idempotência
+- [x] Status codes (200, 201, 204, 400, 404, 409, 500)
+- [x] Headers (`Content-Type`, `Authorization`)
+- [x] Convenções REST: recursos no plural, aninhamento, query params
+- [x] Postman: collections, environments, variáveis, testes
 
 ## Conceitos-chave (com minhas palavras)
 
-| Conceito | O que é | Analogia |
-| --- | --- | --- |
-| Idempotência |  |  |
-| Environment (Postman) |  |  |
+| Conceito              | O que é | Analogia |
+| --------------------- | ------- | -------- |
+| Idempotência          |         |          |
+| Environment (Postman) |         |          |
 
 ## Exercício
 
