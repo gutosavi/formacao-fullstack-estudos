@@ -12,13 +12,13 @@ dotenv.config({ path: "./config/config.env" });
 // Conectando ao banco de dados
 connectDatabase();
 
+// Middleware para analisar o corpo da requisição como JSON
+app.use(express.json());
+
 // Importando rotas
 const jobs = require("./routes/jobs");
 
 app.use("/api/v1", jobs);
-
-// Middleware para analisar o corpo da requisição como JSON
-app.use(express.json());
 
 // Rota de teste
 app.get("/", (req, res) => {
