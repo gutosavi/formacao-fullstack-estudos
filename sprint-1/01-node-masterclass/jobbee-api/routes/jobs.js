@@ -9,6 +9,7 @@ const {
   newJob,
   getJobsInRadius,
   updateJobs,
+  deleteJob,
 } = require("../controllers/jobsController");
 
 // Definindo a rota para obter todos os trabalhos
@@ -22,6 +23,9 @@ router.route("/job/new").post(newJob);
 
 // Definindo rota para atualizar um trabalho existente
 router.route("/job/:id").put(updateJobs);
+
+// Definindo rota para deletar um trabalho existente
+router.route("/job/:id").delete(deleteJob);
 
 // Exporta o router para ser usado em outros arquivos
 module.exports = router;
