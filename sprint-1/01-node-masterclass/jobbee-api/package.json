@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "prod": "SET NODE_ENV=production & node index.js"
+    "prod": "SET NODE_ENV=production & node index.js",
+    "repomix": "npx repomix --output jobbee-api(node+express+mongodb).md"
   },
   "keywords": [],
   "author": "Gustavo Savi",
