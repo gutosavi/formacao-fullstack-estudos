@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const slugify = require("slugify");
 
-const jobsSchema = new mongoose.Schema({
+const jobSchema = new mongoose.Schema({
   title: {
     type: String,
     required: [true, "Please enter Job title"],
@@ -92,4 +93,12 @@ const jobsSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Job", jobsSchema);
+// Cria um slug antes de salvar
+jobSchema.pre("save", function (next) {
+  // Verifica se o título foi modificado
+  if (!this.isModified("title")) return;
+  // Gera o slug a partir do título
+  this.slug = slugify(this.title, { lower: true });
+});
+
+module.exports = mongoose.model("Job", jobSchema);
