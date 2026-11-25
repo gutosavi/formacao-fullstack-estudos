@@ -4,10 +4,15 @@ const express = require("express");
 const router = express.Router();
 
 // Importando métodos do controller
-const { getJobs, newJob } = require("../controllers/jobsController");
+const {
+  getJobs,
+  newJob,
+  getJobsInRadius,
+} = require("../controllers/jobsController");
 
 // Definindo a rota para obter todos os trabalhos
 router.route("/jobs").get(getJobs);
+router.route("/jobs/:zipcode/:distance").get(getJobsInRadius);
 
 // Definindo a rota para criar um novo trabalho
 router.route("/job/new").post(newJob);

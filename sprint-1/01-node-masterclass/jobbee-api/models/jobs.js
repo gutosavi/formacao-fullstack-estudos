@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const slugify = require("slugify");
+const geoCoder = require("../utils/geocoder");
 
 const jobSchema = new mongoose.Schema({
   title: {
@@ -22,6 +23,21 @@ const jobSchema = new mongoose.Schema({
   address: {
     type: String,
     required: [true, "Please add an address."],
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+    },
+    coordinates: {
+      type: [Number],
+      index: "2dsphere",
+    },
+    formattedAddress: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String,
   },
   company: {
     type: String,
@@ -91,6 +107,21 @@ const jobSchema = new mongoose.Schema({
     type: [Object],
     select: false,
   },
+});
+
+// Geocodifica o endereço antes de salvar o trabalho
+jobSchema.pre("save", async function (next) {
+  const loc = await geoCoder.geocode(this.address);
+
+  this.location = {
+    type: "Point",
+    coordinates: [loc[0].longitude, loc[0].latitude],
+    formattedAddress: loc[0].formattedAddress,
+    city: loc[0].county,
+    state: loc[0].state,
+    zipcode: loc[0].zipcode,
+    country: loc[0].countryCode,
+  };
 });
 
 // Cria um slug antes de salvar
