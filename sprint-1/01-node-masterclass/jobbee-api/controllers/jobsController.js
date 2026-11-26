@@ -23,6 +23,13 @@ exports.updateJobs = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Job not found", 404));
   }
 
+  // Chegagem de dono: só quem criou a vaga pode atualizá-lo
+  if (job.user.toString() !== req.user.id) {
+    return next(
+      new ErrorHandler("You are not allowed to update this job", 403),
+    );
+  }
+
   job = await Job.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -41,6 +48,13 @@ exports.deleteJob = catchAsyncErrors(async (req, res, next) => {
 
   if (!job) {
     return next(new ErrorHandler("Job not found", 404));
+  }
+
+  // Chegagem de dono: só quem criou a vaga pode deletá-lo
+  if (job.user.toString() !== req.user.id) {
+    return next(
+      new ErrorHandler("You are not allowed to delete this job", 403),
+    );
   }
 
   job = await Job.findByIdAndDelete(req.params.id);
@@ -78,6 +92,8 @@ exports.getJobsInRadius = catchAsyncErrors(async (req, res, next) => {
 
 // Cria um novo trabalho => /api/v1/job/new
 exports.newJob = catchAsyncErrors(async (req, res, next) => {
+  req.body.user = req.user.id; // Adiciona o ID do usuário autenticado ao corpo da requisição
+
   const job = await Job.create(req.body);
 
   res.status(200).json({

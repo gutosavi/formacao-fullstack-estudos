@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
 
 // Criptografando a senha antes de salvar o usuário
 userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return;
   this.password = await bcrypt.hash(this.password, 10);
 });
 
