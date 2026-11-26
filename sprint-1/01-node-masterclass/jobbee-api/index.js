@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDatabase = require("./config/database");
 const errorMiddleware = require("./middlewares/error");
+const cookieParser = require("cookie-parser");
 
 // Criando uma instância do aplicativo Express
 const app = express();
@@ -15,6 +16,9 @@ connectDatabase();
 
 // Middleware para analisar o corpo da requisição como JSON
 app.use(express.json());
+
+// Cookie parser middleware para lidar com cookies
+app.use(cookieParser());
 
 // Importando rotas
 const jobs = require("./routes/jobs");

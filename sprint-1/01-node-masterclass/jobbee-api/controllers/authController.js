@@ -1,6 +1,7 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const User = require("../models/users");
 const ErrorHandler = require("../utils/errorHandler");
+const sendToken = require("../utils/jwtToken");
 
 // Registrar um novo usuário => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -13,14 +14,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     role,
   });
 
-  // Gera um token JWT para o usuário registrado
-  const token = user.getJwtToken();
-
-  res.status(201).json({
-    success: true,
-    message: "User registered successfully",
-    token,
-  });
+  sendToken(user, 201, res);
 });
 
 // Login usuário => /api/v1/login
@@ -46,11 +40,5 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 
-  // Gera um token JWT para o usuário autenticado
-  const token = user.getJwtToken();
-
-  res.status(200).json({
-    success: true,
-    token,
-  });
+  sendToken(user, 200, res);
 });
