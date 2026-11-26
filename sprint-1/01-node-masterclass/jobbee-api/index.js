@@ -2,6 +2,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDatabase = require("./config/database");
+const errorMiddleware = require("./middlewares/error");
 
 // Criando uma instância do aplicativo Express
 const app = express();
@@ -17,8 +18,10 @@ app.use(express.json());
 
 // Importando rotas
 const jobs = require("./routes/jobs");
-
 app.use("/api/v1", jobs);
+
+// Middleware para lidar com erros
+app.use(errorMiddleware);
 
 // Rota de teste
 app.get("/", (req, res) => {
