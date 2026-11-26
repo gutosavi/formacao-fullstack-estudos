@@ -42,3 +42,36 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
   sendToken(user, 200, res);
 });
+
+// Esqueci minha senha => /api/v1/password/forgot
+exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user)
+    return next(new ErrorHandler("User not found with this email", 404));
+
+  // Gera um token de redefinição de senha
+  const resetToken = user.getResetPasswordToken();
+
+  // Salva o token de redefinição de senha e a data de expiração no banco de dados
+  await user.save({ validateBeforeSave: false });
+
+  // Cria a URL de redefinição de senha
+  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
+
+  // Cria a mensagem de email
+  const message = `Your password reset token is as follows:\n\n${resetPasswordUrl}\n\nIf you have not requested this email, please ignore it.`;
+
+  try {
+    res.status(200).json({
+      success: true,
+      message: `Email sent to: ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+
+    await user.save({ validateBeforeSave: false });
+
+    return next(new ErrorHandler(error.message, 500));
+  }
+});
