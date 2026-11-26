@@ -12,8 +12,9 @@
 
 - [x] Node como runtime (V8, sem DOM, acesso a arquivos/rede)
 - [x] Event loop e I/O não bloqueante
-- [ ] CommonJS x ESM (`require` x `import`, `"type": "module"`)
-- [ ] npm: `init`, dependências x devDependencies, scripts
+- [x] CommonJS x ESM (`require` x `import`, `"type": "module"`)
+- [x] npm: `init`, dependências x devDependencies, scripts
+- [x] Projeto Jobbee API
 
 ## Conceitos-chave (com minhas palavras)
 
@@ -46,5 +47,5 @@ node server.js
 
 ## Referências
 
-- Udemy: Node.js - The Complete RESTful API Masterclass - Seção 1 ao 5;
+- Udemy: Node.js - The Complete RESTful API Masterclass [2026];
 - Docs: https://nodejs.org/api/http.html
