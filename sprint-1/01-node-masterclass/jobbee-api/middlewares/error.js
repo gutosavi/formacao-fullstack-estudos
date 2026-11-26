@@ -1,3 +1,5 @@
+const ErrorHandler = require("../utils/errorHandler");
+
 // Middleware de tratamento de erros do Express
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500; // usa o status do erro ou define como 500
@@ -17,6 +19,13 @@ module.exports = (err, req, res, next) => {
     let error = { ...err };
 
     error.message = err.message;
+
+    // Handler para erros de duplicação de chave única do MongoDB (código 11000)
+    if (err.code === 11000) {
+      const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
+
+      error = new ErrorHandler(message, 400);
+    }
 
     res.status(err.statusCode).json({
       success: false,
